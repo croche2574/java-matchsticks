@@ -1,5 +1,8 @@
 package Matchsticks;
 import java.util.Scanner;
+
+import javax.swing.text.PlainDocument;
+
 import java.util.Random;
 
 public class MatchsticksGame {
@@ -20,26 +23,34 @@ public class MatchsticksGame {
     public static void aiGame(Boolean smart) {
         Random generator = new Random();
         Scanner in = new Scanner(System.in);
-        Boolean playerFirst;
+        Boolean playerFirst = true;
         Boolean playerWon = true;
         Player playerOne = new Player();
+        Player playerTwo = new Player();
         GameBoard board = new GameBoard();
         AI computer = new AI(smart);
         Frontend display = new Frontend();
 
-        if (generator.nextInt(2) == 1) {
-            System.out.println("Computer goes first.");
-            playerFirst = false;
-        } else {
-            System.out.println("You go first.");
-            playerFirst = true;
+        if (!smart) {
+            if (generator.nextInt(2) == 1) {
+                System.out.println("Computer goes first.");
+                playerFirst = false;
+            } else {
+                System.out.println("You go first.");
+                playerFirst = true;
+            }
         }
-       
+        else {
+            System.out.println("Not Yet Implemented");
+            StartGame();
+        }
+
         while (board.totalMatches() != 0) {
-            display.displayBoardstate(board.getBoardstate());
             if (playerFirst) {
+                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(playerOne.prompt(board.getBoardstate()));
                 if (board.totalMatches() != 0) {
+                    display.displayBoardstate(board.getBoardstate());
                     board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
                 }
                 else {
@@ -47,6 +58,7 @@ public class MatchsticksGame {
                 }
             }
             else {
+                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
                 if (board.totalMatches() != 0) {
                     board.removeMatches(playerOne.prompt(board.getBoardstate()));
