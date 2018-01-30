@@ -23,6 +23,6 @@ public class GameBoard {
     }
 
     public void removeMatches(int[] amount) {
-        state[amount[0]] = amount[1];
+        state[amount[0]] = amount[1];        
     }
 }

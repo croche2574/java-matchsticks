@@ -17,7 +17,7 @@ public class Frontend {
         switch (choice) {
             case "a": 
                 smartComputer = true;
-                System.out.println("Playing against Smart Computer");
+                //System.out.println("Playing against Smart Computer");
                 break;
             case "b": 
                 smartComputer = false;

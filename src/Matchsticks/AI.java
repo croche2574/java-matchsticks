@@ -25,16 +25,14 @@ public class AI {
         }
         else {
             r = generator.nextInt(2);
-            m = generator.nextInt(total);
+            m = generator.nextInt(state[r]);
 
             if (m <= state[r]) {
                 choice[0] = r;
-                choice[1] = m;
-                
-                
+                choice[1] = ((state[r] - m));
             }
         }
-        System.out.println("The Computer removed " + m + " matches from row " + (r+1) + ".");
+        System.out.println("The Computer removed " + m + " matches from row " + r + ".");
         return choice;
     }
 }

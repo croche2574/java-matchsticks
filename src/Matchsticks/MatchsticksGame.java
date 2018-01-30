@@ -20,6 +20,10 @@ public class MatchsticksGame {
         aiGame(smartComputer);
     }
 
+    public static void vsGame() {
+
+    }
+
     public static void aiGame(Boolean smart) {
         Random generator = new Random();
         Scanner in = new Scanner(System.in);
@@ -49,9 +53,11 @@ public class MatchsticksGame {
             if (playerFirst) {
                 display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(playerOne.prompt(board.getBoardstate()));
+                display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {
                     display.displayBoardstate(board.getBoardstate());
                     board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
+                    display.displayBoardstate(board.getBoardstate());
                 }
                 else {
                     playerWon = false;
@@ -60,8 +66,10 @@ public class MatchsticksGame {
             else {
                 display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
+                display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {
                     board.removeMatches(playerOne.prompt(board.getBoardstate()));
+                    display.displayBoardstate(board.getBoardstate());
                 }
                 else {
                     playerWon = true;
