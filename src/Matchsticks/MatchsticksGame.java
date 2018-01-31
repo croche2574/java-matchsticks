@@ -88,6 +88,7 @@ public class MatchsticksGame {
     public static void gameOver() {
         Scanner in = new Scanner(System.in);
         System.out.println("Play again? [Y/N]");
+        System.out.print(">");
         String choice = in.nextLine();
 
         switch (choice) {

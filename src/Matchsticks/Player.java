@@ -15,15 +15,15 @@ public class Player {
 
         while (!validChoice) {
             System.out.print(">");
-            selectedRow = in.nextInt();
+            selectedRow = in.nextInt() - 1;
             numMatches = in.nextInt();
 
             if (selectedRow >= 0 && selectedRow <= 2) {
                 //Number of matches <= number in selected row
                 if (numMatches <= rows[selectedRow] && numMatches > 0) {
                     response[0] = selectedRow;
-                    response[1] = (response[1] - numMatches);
-                    System.out.println(numMatches + " matches removed from row " + selectedRow + ".");
+                    response[1] = (rows[selectedRow] - numMatches);
+                    System.out.println(numMatches + " matches removed from row " + (selectedRow + 1) + ".");
                     validChoice = true;
                 }
                 else {
