@@ -12,16 +12,92 @@ public class MatchsticksGame {
 
     public static void StartGame () {
         Random generator = new Random();
-        int numPlayers = 1;
-        Boolean smartComputer = true;
+        Boolean smartComputer = false;
+        Boolean twoPlayer = false;
         Frontend display = new Frontend();
+        String choice;
 
-        smartComputer = display.startMenu();
-        aiGame(smartComputer);
+        choice = display.startMenu();
+        
+        switch (choice) {
+            case "a": 
+                smartComputer = true;
+                //System.out.println("Playing against Smart Computer");
+                break;
+            case "b": 
+                smartComputer = false;
+                System.out.println("Playing against Dumb Computer");
+                
+                break;
+            case "c":
+                twoPlayer = true;
+                System.out.println("Playing 2 player Vs. Mode");
+                
+                break;
+            default: 
+                System.out.println("Please Try Again");
+                MatchsticksGame.StartGame();
+                break;
+        }
+        if (twoPlayer) {
+            vsGame();
+        }
+        else {
+            aiGame(smartComputer);
+        }
     }
 
     public static void vsGame() {
+        Random generator = new Random();
+        Scanner in = new Scanner(System.in);
+        Boolean playerOneFirst;
+        Boolean playerOneWins = true;
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
+        GameBoard board = new GameBoard();
+        Frontend display = new Frontend();
 
+        if (generator.nextInt(2) == 1) {
+            System.out.println("Player one goes first.");
+            playerOneFirst = true;
+        } else {
+            System.out.println("Player two goes first.");
+            playerOneFirst = false;
+        }
+
+        while (board.totalMatches() != 0) {
+            if (playerOneFirst) {
+                display.displayBoardstate(board.getBoardstate());
+                board.removeMatches(playerOne.prompt(board.getBoardstate()));
+                display.displayBoardstate(board.getBoardstate());
+                if (board.totalMatches() != 0) {
+                    display.displayBoardstate(board.getBoardstate());
+                    board.removeMatches(playerTwo.prompt(board.getBoardstate()));
+                    display.displayBoardstate(board.getBoardstate());
+                }
+                else {
+                    playerOneWins = false;
+                }
+            }
+            else {
+                display.displayBoardstate(board.getBoardstate());
+                board.removeMatches(playerTwo.prompt(board.getBoardstate()));
+                display.displayBoardstate(board.getBoardstate());
+                if (board.totalMatches() != 0) {
+                    board.removeMatches(playerOne.prompt(board.getBoardstate()));
+                    display.displayBoardstate(board.getBoardstate());
+                }
+                else {
+                    playerOneWins = true;
+                }
+            }
+        }
+        if (playerOneWins) {
+            System.out.println("Player One Wins!");
+        } else {
+            System.out.println("Player Two Wins!");
+        }
+        gameOver();
     }
 
     public static void aiGame(Boolean smart) {
@@ -30,7 +106,6 @@ public class MatchsticksGame {
         Boolean playerFirst = true;
         Boolean playerWon = true;
         Player playerOne = new Player();
-        Player playerTwo = new Player();
         GameBoard board = new GameBoard();
         AI computer = new AI(smart);
         Frontend display = new Frontend();
