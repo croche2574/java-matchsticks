@@ -54,13 +54,8 @@ public class MatchsticksGame {
         GameBoard board = new GameBoard();
         Frontend display = new Frontend();
 
-        if (generator.nextInt(2) == 1) {
-            System.out.println("Player one goes first.");
-            playerOneFirst = true;
-        } else {
-            System.out.println("Player two goes first.");
-            playerOneFirst = false;
-        }
+        playerOneFirst = display.turnPrompt();
+        
         display.displayBoardstate(board.getBoardstate());
         while (board.totalMatches() != 0) {
             if (playerOneFirst) {
@@ -105,13 +100,7 @@ public class MatchsticksGame {
         Frontend display = new Frontend();
 
         if (!smart) {
-            if (generator.nextInt(2) == 1) {
-                System.out.println("Computer goes first.");
-                playerFirst = false;
-            } else {
-                System.out.println("You go first.");
-                playerFirst = true;
-            }
+            playerFirst = display.turnPrompt();
         }
         else {
             System.out.println("Not Yet Implemented");
