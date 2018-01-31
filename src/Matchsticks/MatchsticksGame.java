@@ -1,8 +1,5 @@
 package Matchsticks;
 import java.util.Scanner;
-
-import javax.swing.text.PlainDocument;
-
 import java.util.Random;
 
 public class MatchsticksGame {
@@ -64,14 +61,12 @@ public class MatchsticksGame {
             System.out.println("Player two goes first.");
             playerOneFirst = false;
         }
-
+        display.displayBoardstate(board.getBoardstate());
         while (board.totalMatches() != 0) {
             if (playerOneFirst) {
-                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(playerOne.prompt(board.getBoardstate()));
                 display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {
-                    display.displayBoardstate(board.getBoardstate());
                     board.removeMatches(playerTwo.prompt(board.getBoardstate()));
                     display.displayBoardstate(board.getBoardstate());
                 }
@@ -80,7 +75,6 @@ public class MatchsticksGame {
                 }
             }
             else {
-                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(playerTwo.prompt(board.getBoardstate()));
                 display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {
@@ -123,14 +117,12 @@ public class MatchsticksGame {
             System.out.println("Not Yet Implemented");
             StartGame();
         }
-
+        display.displayBoardstate(board.getBoardstate());
         while (board.totalMatches() != 0) {
             if (playerFirst) {
-                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(playerOne.prompt(board.getBoardstate()));
                 display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {
-                    display.displayBoardstate(board.getBoardstate());
                     board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
                     display.displayBoardstate(board.getBoardstate());
                 }
@@ -139,7 +131,6 @@ public class MatchsticksGame {
                 }
             }
             else {
-                display.displayBoardstate(board.getBoardstate());
                 board.removeMatches(computer.takeTurn(board.getBoardstate(), board.totalMatches()));
                 display.displayBoardstate(board.getBoardstate());
                 if (board.totalMatches() != 0) {

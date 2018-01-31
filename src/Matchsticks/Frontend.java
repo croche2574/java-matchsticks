@@ -10,7 +10,7 @@ public class Frontend {
         System.out.println("Pick an option:");
         System.out.println("a). One Player against Smart Computer,");
         System.out.println("b). One Player against Dumb Computer");
-        System.out.println("c). Two Players Vs.");
+        System.out.println("c). Two Players Vs. Mode");
         System.out.print(">");
         String choice = in.nextLine().toLowerCase();
 
