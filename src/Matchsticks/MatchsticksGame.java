@@ -1,12 +1,16 @@
+/*
+* Main game code.  Handles turn order, starts the game, and handles the game modes.
+*/
 package Matchsticks;
 
 public class MatchsticksGame {
+    //Class main, starts the game
     public static void main(String[] args) {
         StartGame();
     }
 
+    //Starts the game and handles the main menu input
     public static void StartGame() {
-        Boolean smartComputer = false;
         Boolean twoPlayer = false;
         Frontend display = new Frontend();
         String choice;
@@ -15,32 +19,27 @@ public class MatchsticksGame {
 
         switch (choice) {
         case "a":
-            smartComputer = true;
-            //System.out.println("Playing against Smart Computer");
+            System.out.println("Playing against Dumb Computer");
             break;
         case "b":
-            smartComputer = false;
-            System.out.println("Playing against Dumb Computer");
-
-            break;
-        case "c":
             twoPlayer = true;
             System.out.println("Playing 2 player Vs. Mode");
-
             break;
         default:
             System.out.println("Please Try Again");
             MatchsticksGame.StartGame();
             break;
         }
+        //Starts the chosen game mode
         if (twoPlayer) {
             vsGame();
         } else {
-            aiGame(smartComputer);
+            aiGame();
         }
     }
-
+    //Two player game mode
     public static void vsGame() {
+        //Initialize board, players, and display
         Boolean playerOneFirst;
         Boolean playerOneWins = true;
         GameBoard board = new GameBoard();
@@ -51,6 +50,7 @@ public class MatchsticksGame {
         playerOneFirst = display.turnPrompt();
 
         display.displayBoardstate(board);
+        //Loops until all matches are removed
         while (board.totalMatches() != 0) {
             if (playerOneFirst) {
                 board.removeMatches(playerOne.prompt());
@@ -79,20 +79,17 @@ public class MatchsticksGame {
         }
         Frontend.gameOver();
     }
-
-    public static void aiGame(Boolean smart) {
+    //Handles game against randomized computer
+    public static void aiGame() {
         Boolean playerFirst = true;
         Boolean playerWon = true;
         GameBoard board = new GameBoard();
         Player playerOne = new Player(board);
-        AI computer = new AI(smart, board);
+        AI computer = new AI(board);
         Frontend display = new Frontend();
 
-        
-            playerFirst = display.turnPrompt();
-        
-            
-        
+        playerFirst = display.turnPrompt();
+
         display.displayBoardstate(board);
         while (board.totalMatches() != 0) {
             if (playerFirst) {

@@ -10,11 +10,11 @@ import java.util.Scanner;
 public class Player {
     public int[] response = new int[2];
     private GameBoard board;
-
+    //Player constructor
     public Player(GameBoard game) {
         board = game;
     }
-
+    //Prompts the player for the row and amount of matches
     public int[] prompt() {
         Scanner in = new Scanner(System.in);
         int selectedRow;
@@ -27,17 +27,17 @@ public class Player {
 
         response[0] = selectedRow;
         response[1] = numMatches;
-
+        
         if (validateChoice()) {
             return response;
         } else {
             prompt();
         }
+        //Necesary to avoid error message
         return response;
     }
-
+    //Checks if choice is valid.  Returns true or false
     public Boolean validateChoice() {
-        Boolean validChoice = false;
         int selectedRow = response[0];
         int numMatches = response[1];
         int[] state = board.getBoardstate();
@@ -47,7 +47,7 @@ public class Player {
             //Number of matches <= number in selected row
             if (numMatches <= state[selectedRow] && numMatches > 0) {
                 System.out.println(numMatches + " matches removed from row " + (selectedRow + 1) + ".");
-                validChoice = true;
+                return true;
             } else {
                 Frontend.handleError("overMaxMatches");
             }
@@ -55,6 +55,6 @@ public class Player {
             Frontend.handleError("badRow");
         }
 
-        return validChoice;
+        return false;
     }
 }

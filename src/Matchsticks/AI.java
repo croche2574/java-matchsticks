@@ -8,23 +8,18 @@ package Matchsticks;
 import java.util.Random;
 
 public class AI extends Player {
-    private Boolean AIType;
-
-    public AI(Boolean isSmart, GameBoard game) {
+    //Constructor
+    public AI(GameBoard game) {
         super(game);
-        AIType = isSmart;
     }
 
+    //Handles turn, and returns response
     public int[] compTurn(GameBoard board) {
-
-        if (AIType) {
-            smartChoice(board);
-        } else {
-            randChoice(board);
-        }
+        randChoice(board);
         return response;
     }
 
+    //Randomly selects a valid row and number of matches
     public void randChoice(GameBoard board) {
         int[] state = board.getBoardstate();
         int r = 0;
@@ -45,9 +40,4 @@ public class AI extends Player {
         System.out.println("The Computer removed " + response[1] + " matches from row " + (response[0] + 1) + ".");
     }
 
-    public void smartChoice(GameBoard board) {
-        MiniMax minmax = new MiniMax(board);
-        minmax.collectMoves();
-        //System.out.println("The Computer removed " + response[1] + " matches from row " + (response[0] + 1) + ".");
-    }
 }

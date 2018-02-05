@@ -1,24 +1,27 @@
+/*
+* Class representing the interface
+*/
 package Matchsticks;
 
 import java.util.Scanner;
 
 public class Frontend {
+    //Shows start menu, and returns the selection
     public String startMenu() {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Matchsticks");
         System.out.println("-----------");
         System.out.println("Pick an option:");
-        System.out.println("a). One Player against Smart Computer,");
-        System.out.println("b). One Player against Dumb Computer");
-        System.out.println("c). Two Players Vs. Mode");
+        System.out.println("a). One Player against Dumb Computer");
+        System.out.println("b). Two Players Vs. Mode");
         System.out.print(">");
 
         String choice = in.nextLine().toLowerCase();
 
         return choice;
     }
-
+    //Shows the turn select menu
     public Boolean turnPrompt() {
         Scanner in = new Scanner(System.in);
         Boolean oneFirst = true;
@@ -36,7 +39,6 @@ public class Frontend {
             break;
         case "b":
             oneFirst = false;
-
             System.out.println("Player One goes second.");
             break;
         default:
@@ -47,7 +49,7 @@ public class Frontend {
 
         return oneFirst;
     }
-
+    //Displays the current board-state
     public void displayBoardstate(GameBoard board) {
         int[] state = board.getBoardstate();
 
@@ -61,7 +63,7 @@ public class Frontend {
             System.out.println("");
         }
     }
-
+    //Displays the apropriate error message
     public static void handleError(String errorType) {
         switch (errorType) {
         case "overMaxMatches":
@@ -76,7 +78,7 @@ public class Frontend {
             break;
         }
     }
-
+    //Displays the Play again menu
     public static void gameOver() {
         Scanner in = new Scanner(System.in);
         System.out.println("Play again? [Y/N]");
